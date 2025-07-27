@@ -23,76 +23,123 @@ export default function ClientLayout({
 
   return (
     <html lang="en">
-      <body>
-        <header className="flex m-4">
-          <div>
-            <Link href="/">
-              <h1 className="text-center text-4xl font-bold text-red-600">
-                SojebOJ
-              </h1>
-            </Link>
+      <body className="min-h-screen bg-gray-50">
+        <header className="bg-white shadow-sm">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center py-4">
+              <Link href="/">
+                <h1 className="text-3xl font-bold text-red-600 hover:text-red-700 transition-colors">
+                  Online Judge
+                </h1>
+              </Link>
+              
+              <nav className="flex items-center space-x-6">
+                <Link 
+                  className="text-gray-700 hover:text-red-600 font-medium transition-colors" 
+                  href="/"
+                >
+                  Home
+                </Link>
+                <Link 
+                  className="text-gray-700 hover:text-red-600 font-medium transition-colors" 
+                  href="/contests"
+                >
+                  Contests
+                </Link>
+                <Link 
+                  className="text-gray-700 hover:text-red-600 font-medium transition-colors" 
+                  href="/problems"
+                >
+                  Problems
+                </Link>
+
+                {userData ? (
+                  <div className="relative group">
+                    <button className="flex items-center space-x-1 text-gray-700 hover:text-red-600 font-medium transition-colors">
+                      <span>{userData?.username}</span>
+                      <svg 
+                        className="w-4 h-4" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24" 
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-200">
+                      <Link
+                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                        href={`/profile/${userData?.username}`}
+                      >
+                        Profile
+                      </Link>
+                      <Link 
+                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                        href="/settings"
+                      >
+                        Settings
+                      </Link>
+                      <Link 
+                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                        href="/author"
+                      >
+                        Author Dashboard
+                      </Link>
+                      <button
+                        className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                        onClick={handleLogout}
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="relative group">
+                    <button className="flex items-center space-x-1 text-gray-700 hover:text-red-600 font-medium transition-colors">
+                      <span>Account</span>
+                      <svg 
+                        className="w-4 h-4" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24" 
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-200">
+                      <Link 
+                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                        href="/auth/login"
+                      >
+                        Login
+                      </Link>
+                      <Link 
+                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                        href="/auth/register"
+                      >
+                        Register
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </nav>
+            </div>
           </div>
         </header>
 
-        <nav className="navbar">
-          <Link className="nav-item" href="/">
-            Home
-          </Link>
-          <Link className="nav-item" href="/contests">
-            Contest
-          </Link>
-          <Link className="nav-item" href="/problems">
-            Problems
-          </Link>
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {children}
+        </main>
 
-          {userData ? (
-            <>
-              <div className="dropdown">
-                <button className="dropbtn nav-item">
-                  {userData?.username}
-                </button>
-                <div className="dropdown-content">
-                  <Link
-                    className="dropdown-item"
-                    href={`/profile/${userData?.username}`}
-                  >
-                    Profile
-                  </Link>
-                  <Link className="dropdown-item" href={`/settings`}>
-                    Settings
-                  </Link>
-                  <Link className="dropdown-item" href={`/author`}>
-                    Author Dashboard
-                  </Link>
-                  <button
-                    className="dropdown-item w-full"
-                    onClick={handleLogout}
-                  >
-                    Logout
-                  </button>
-                </div>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="dropdown">
-                <button className="dropbtn nav-item">Account</button>
-                <div className="dropdown-content">
-                  <Link className="dropdown-item" href="/auth/login">
-                    Login
-                  </Link>
-                  <Link className="dropdown-item" href="/auth/register">
-                    Register
-                  </Link>
-                </div>
-              </div>
-            </>
-          )}
-        </nav>
-
-        <div className="mt-6"></div>
-
-        {children}
+        <footer className="bg-white border-t mt-12">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <p className="text-center text-gray-500 text-sm">
+              © {new Date().getFullYear()} Online Judge. All rights reserved.
+            </p>
+          </div>
+        </footer>
       </body>
     </html>
   );

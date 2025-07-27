@@ -4,7 +4,7 @@ import { UserService } from "@/service/user/user.service";
 import ClientLayout from "./components/ClientLayout";
 
 export const metadata = {
-  title: "Sojeb oj",
+  title: "Online judge",
   description: "Participate in contests and win exciting prizes",
 };
 

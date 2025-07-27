@@ -8,7 +8,9 @@ Backend part: https://github.com/SojebSikder/online-judge-backend
 
 ```bash
 # Install packages
-pnpm install
+npm i 
+
+yarn install
 ```
 
 ## Config
@@ -21,5 +23,5 @@ Set backend api endpoint.
 
 ```bash
 # run in developement
-pnpm dev
+yarn dev
 ```
